@@ -15,8 +15,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
-      <body>
-        <Navbar/>
+      <body className="overflow">
         {children}
       </body>
     </html>
