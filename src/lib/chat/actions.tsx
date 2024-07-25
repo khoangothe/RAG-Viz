@@ -62,7 +62,7 @@ import BotMessage from '@/app/_components/botmessage';
           textNode = <BotMessage content={textStream.value} />
         }
   
-        if (done) {``
+        if (done) {
           textStream.done()
           aiState.done({
             ...aiState.get(),
@@ -84,6 +84,7 @@ import BotMessage from '@/app/_components/botmessage';
 
   return {
     id: nanoid(),
+    role: 'assistant',
     display: result.value
   }
 }
