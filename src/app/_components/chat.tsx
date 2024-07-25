@@ -15,9 +15,7 @@ export default function Chat(){
   
 
   <div className="flex flex-col max-w-2xl w-full mx-auto mt-20">
-        <MessagePanel input={input}
-        
-        />
+        <MessagePanel input={input}/>
         <MessageForm 
         input = {input}
         setInput={setInput}

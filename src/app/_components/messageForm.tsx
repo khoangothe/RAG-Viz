@@ -6,6 +6,7 @@ import { useActions, useUIState } from 'ai/rsc'
 import Textarea from 'react-textarea-autosize'
 import {Button, IconButton} from '@radix-ui/themes'
 import {GearIcon} from "@radix-ui/react-icons"
+import UserMessage from './usermessage'
 
 export default function MessageForm({
       input,
@@ -33,11 +34,7 @@ export default function MessageForm({
                {
                  id: nanoid(),
                  role: 'user',
-                 display: <div className="w-full flex justify-end  py-4">
-                 <div className="max-w-[70%] rounded-3xl bg-[#f4f4f4] px-5 py-2.5 ">
-                   {value}
-                   </div>
-                 </div>
+                 display: <UserMessage  content={value}/>
                }
              ])
          
