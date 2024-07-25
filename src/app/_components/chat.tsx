@@ -18,7 +18,6 @@ export default function Chat(){
         <MessagePanel input={input}
         
         />
-        <p className="bg-white">{input}</p>
         <MessageForm 
         input = {input}
         setInput={setInput}
