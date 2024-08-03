@@ -4,7 +4,7 @@ import Link from "next/link"
 
 const links = [
     {
-        title : "Khoa Ngo The",
+        title : "Learn RAG",
         href : "/" 
     }
 ]

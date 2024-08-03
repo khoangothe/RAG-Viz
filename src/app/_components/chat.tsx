@@ -13,14 +13,22 @@ export default function Chat(){
   
   return (
   
-
-  <div className="flex flex-col max-w-2xl w-full mx-auto mt-20">
+  <div className="mt-20 w-full flex">
+    <div className=" w-1/2  overflow-y-auto scrollbar-hide ">
+      <div className="flex flex-col max-w-2xl   mx-auto">
         <MessagePanel input={input}/>
-        <MessageForm 
-        input = {input}
-        setInput={setInput}
-        />
- </div>
+          <MessageForm 
+          input = {input}
+          setInput={setInput}
+          />
+      </div>
+
+    </div>
+    <div className="w-1/2">
+
+    </div>
+  </div>
+
   )
 
 }

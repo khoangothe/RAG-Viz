@@ -45,8 +45,8 @@ export default function MessageForm({
       }
    
    >
-    <div className="fixed left-0 bottom-5  w-full flex">
-      <div className="w-full mx-auto my-auto bg-[#272626] lg:max-w-[50%]  rounded-3xl">
+    <div className="fixed left-0 bottom-5  w-1/2 flex">
+      <div className="w-full mx-auto my-auto bg-[#272626] lg:max-w-[80%]  rounded-3xl">
          <div className="flex w-full justify-between">
                <div className="w-12">
                    
