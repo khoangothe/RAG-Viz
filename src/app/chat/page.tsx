@@ -8,8 +8,7 @@ export default function HomePage() {
 
 
   return (
-    <main className="flex top-0 h-screen absolute w-full">
-      <StickyNav/>
+    <main className="flex h-screen w-full">
       <AI initialAIState={{ chatId: id, messages: [] }}>
         <Chat/>
       </AI>

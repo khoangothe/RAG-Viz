@@ -7,9 +7,6 @@ import { useAIState, useUIState } from "ai/rsc";
 
 export default function RagChat(){
   const [input, setInput] = useState('');
-  const [aiState] = useAIState()
-
-
   
   return (
   
@@ -23,7 +20,6 @@ export default function RagChat(){
           setInput={setInput}
           />
       </div>
-
     </div>
     <div className="w-1/2">
 
