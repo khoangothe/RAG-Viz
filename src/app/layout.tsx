@@ -7,6 +7,7 @@ import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "@/app/api/uploadthing/core";
 
+import StickyNav from "@/app/_components/stickynav";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -29,6 +30,7 @@ export default function RootLayout({
            */
           routerConfig={extractRouterConfig(ourFileRouter)}
         />
+        <StickyNav/>
         {children}
       </body>
     </html>

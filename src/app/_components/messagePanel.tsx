@@ -4,7 +4,7 @@ import {useUIState } from 'ai/rsc';
 
 export default function MessagePanel({input} :{input: string}){
 
-  const [conversation, setConversation] = useUIState()
+  const [conversation, _] = useUIState()
 
 
     return(    
