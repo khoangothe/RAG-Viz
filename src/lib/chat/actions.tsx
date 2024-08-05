@@ -1,9 +1,7 @@
 import 'server-only'
 import {
     createAI,
-    createStreamableUI,
     getMutableAIState,
-    getAIState,
     streamUI,
     createStreamableValue
   } from 'ai/rsc';
@@ -27,9 +25,13 @@ import BotMessage from '@/app/_components/botmessage';
     display: React.ReactNode
   }
 
-  async function submitUserMessage(content: string) {
+  type Actions = {
+    submitUserMessage: (content: string) => Promise<UIState>;
+  };
+
+  async function submitUserMessage(content: string)  : Promise<UIState>{
     'use server'
-    const aiState = getMutableAIState<typeof AI>()
+    const aiState = getMutableAIState<AIType>()
     aiState.update({
       ...aiState.get(),
       messages: [
@@ -50,12 +52,11 @@ import BotMessage from '@/app/_components/botmessage';
       initial: "",
       system: ``,
       messages: [
-        ...aiState.get().messages.map((message: any) => ({
+        ...aiState.get().messages.map((message: Message) => ({
           role: message.role,
           content: message.content,
-          name: message.name
         }))
-      ],
+      ] as Message[],
       text: ({ content, done, delta }) => {
         if (!textStream) {
           textStream = createStreamableValue('')
@@ -89,12 +90,16 @@ import BotMessage from '@/app/_components/botmessage';
   }
 }
 
-  export const AI = createAI<AIState, UIState[]>({
+  export const AI = createAI<AIState, UIState[], Actions>({
     actions: {
       submitUserMessage
     },
     initialUIState: [],
     initialAIState: { chatId: nanoid(), messages: [] },
   })
+
+
+  export type AIType = typeof AI; 
+
 
 

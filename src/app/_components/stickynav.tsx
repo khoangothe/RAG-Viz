@@ -34,7 +34,7 @@ const links = [
   
   const NavigationMenuDemo = () => {
     const pathname = usePathname();
-    const currentLink = links.find(link => link.href === pathname) || links[0];
+    const currentLink = links.find(link => link.href === pathname) ?? links[0];
     const otherLinks = links.filter(link => link.href !== pathname);
 
     return (
@@ -89,9 +89,10 @@ const links = [
   };
   
   interface SelectItemProps {
+
       children: React.ReactNode;
       className?: string;
-      [key: string]: any; // To allow any other props
+      [key: string]: string | number  | undefined  | React.ReactNode;
     }
   
   const ListItem = React.forwardRef<HTMLAnchorElement, SelectItemProps>(({ className, children, title, ...props }, forwardedRef) => (
@@ -111,6 +112,8 @@ const links = [
       </NavigationMenu.Link>
     </li>
   ));
+
+  ListItem.displayName = "ListItem"
 
 export default function StickyNav(){
     return (

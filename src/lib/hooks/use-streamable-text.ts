@@ -9,16 +9,23 @@ export const useStreamableText = (
   )
 
   useEffect(() => {
-    ;(async () => {
+    const fetchData = async () => {
       if (typeof content === 'object') {
         let value = ''
-        for await (const delta of readStreamableValue(content)) {
-          if (typeof delta === 'string') {
-            setRawContent((value = value + delta))
+        try {
+
+          for await (const delta of readStreamableValue(content)) {
+            if (typeof delta === 'string') {
+              setRawContent((value = value + delta))
+            }
           }
+        }catch (error) {
+          console.error('Error reading streamable value:', error);
         }
       }
-    })()
+    }
+    
+    fetchData().catch((error) => console.error('Error in useEffect async function:', error));
   }, [content])
 
   return rawContent

@@ -21,14 +21,14 @@ export default function MessageForm({
    setInput: (value: string) => void
  }) {
 
-   const { submitUserMessage } = useActions()
+   const { submitUserMessage } = useActions<typeof  AI>()
    const [_, setMessages] = useUIState<typeof AI>()
 
 
    return (
    <form
       onSubmit={
-         async  (e : any) =>{
+         async  (e : React.FormEvent<HTMLFormElement>) =>{
             e.preventDefault()
             const value = input.trim()
             setInput('')

@@ -1,10 +1,10 @@
-import { UIState } from '@/lib/chat/actions';
+import { AIType, UIState } from '@/lib/chat/actions';
 import {useUIState } from 'ai/rsc';
 
 
 export default function MessagePanel({input} :{input: string}){
 
-  const [conversation, _] = useUIState()
+  const [conversation, _] = useUIState<AIType>()
 
 
     return(    
