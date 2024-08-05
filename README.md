@@ -10,10 +10,10 @@ Create an interface to visualize the steps of RAG in realtime
 - [x] Input component adding new input to chat history
 
 - [x] Calling OpenAi Capabilities
-
+- [x] Redrawn Nav bar
 2. RAG UI visualization:
 
-- [x] Split sections for the visualization panel
+- [x] Split sections for the visualization panel in RAG
 - [ ] Get the ability to upload file, maybe through s3 and then process through a Lambda function or on uploaded? 
   - [ ] Using UploadThing 
     - [x] Integrate UploadThing
@@ -21,7 +21,7 @@ Create an interface to visualize the steps of RAG in realtime
     - [ ] How did they get the progress bar done? Create customized progress bar
     - [ ] Wipe out UploadThing everyhour
     - [ ] Hook to Pinecone in onComplete
-    - [ ] Wipe out Pinecone every hour
+    - [ ] Wipe out Pinecone every hour using a cron job
   - [ ] Using customized S3? Hook to Pinecone through a Lambda function? 
 - [ ] Learn how to draw trees on website?
 - [ ] Learn how to track langchain step in realtime
