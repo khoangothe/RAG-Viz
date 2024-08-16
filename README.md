@@ -4,13 +4,7 @@ Create an interface to visualize the steps of RAG in realtime
 
 1. Chat application:
 - [x] Top down UI Layout 
-
-- [x] Chat component showing chat history based on input
-
-- [x] Input component adding new input to chat history
-
-- [x] Calling OpenAi Capabilities
-- [x] Redrawn Nav bar
+- [ ] Enter to submit form
 2. RAG UI visualization:
 
 - [x] Split sections for the visualization panel in RAG
