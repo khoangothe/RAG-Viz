@@ -2,7 +2,9 @@ import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
 import {db} from  "@/server/db" 
 import { files } from "@/server/db/schema";
-import { index } from "drizzle-orm/mysql-core";
+import { Pinecone } from '@pinecone-database/pinecone'
+
+
 
 const f = createUploadthing();
   
@@ -17,14 +19,22 @@ export const pdfRouter = {
       // This code RUNS ON YOUR SERVER after upload
       console.log("Upload complete for userId:", metadata.userId);
       const index_name = metadata.userId + "_" +  file.name;
-      await db.insert(files).values(
-        {
-          userid: metadata.userId,
-          file_name: file.name,
-          file_url: file.url,
-          index_name: index_name
-        }
-      )
+      try{
+        await db.insert(files).values(
+          {
+            userid: metadata.userId,
+            file_name: file.name,
+            file_url: file.url,
+            index_name: index_name
+          }
+        )
+      } catch (error) {
+        console.error('Error adding file:', error);
+
+      }
+
+
+
 
  
       // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback

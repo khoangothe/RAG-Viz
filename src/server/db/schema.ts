@@ -44,7 +44,7 @@ export const files = createTable(
     userid: varchar("userid", { length: 256 }),
     file_name: varchar("file_name", { length: 256 }),
     file_url: varchar("file_url", { length: 256 }),
-    index_name: varchar("file_url", { length: 256 }),
+    index_name: varchar("index_name", { length: 256 }),
     createdAt: timestamp("created_at", { withTimezone: true })
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
