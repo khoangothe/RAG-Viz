@@ -28,7 +28,6 @@ export default function RagChat(){
             label: "text-red-500"
           }
         }
-        className=""
         endpoint="pdfUploader"
         onClientUploadComplete={(res) => {
           // Do something with the response

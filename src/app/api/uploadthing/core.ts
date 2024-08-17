@@ -1,6 +1,9 @@
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
- 
+import {db} from  "@/server/db" 
+import { files } from "@/server/db/schema";
+import { index } from "drizzle-orm/mysql-core";
+
 const f = createUploadthing();
   
 // FileRouter for your app, can contain multiple FileRoutes
@@ -8,14 +11,20 @@ export const pdfRouter = {
   pdfUploader: f({ pdf: { maxFileSize: "4MB" } })
     .middleware(async ({ req }) => {
       // Whatever is returned here is accessible in onUploadComplete as `metadata`
-      return { userId: 1 };
+      return { userId: "1" };
     })
     .onUploadComplete(async ({ metadata, file }) => {
       // This code RUNS ON YOUR SERVER after upload
       console.log("Upload complete for userId:", metadata.userId);
-      
-      console.log("file url", file.url);
-      console.log("file name", file.url);
+      const index_name = metadata.userId + "_" +  file.name;
+      await db.insert(files).values(
+        {
+          userid: metadata.userId,
+          file_name: file.name,
+          file_url: file.url,
+          index_name: index_name
+        }
+      )
 
  
       // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
