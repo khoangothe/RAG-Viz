@@ -4,7 +4,7 @@ Create an interface to visualize the steps of RAG in realtime
 
 1. Chat application:
 - [x] Top down UI Layout 
-- [ ] Enter to submit form
+- [X] Enter to submit form
 2. RAG UI visualization:
 
 - [x] Split sections for the visualization panel in RAG

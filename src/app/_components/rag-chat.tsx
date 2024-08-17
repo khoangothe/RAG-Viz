@@ -12,8 +12,8 @@ export default function RagChat(){
   return (
   
   <div className="mt-20 w-full flex">
-    <div className=" w-1/2  overflow-y-auto scrollbar-hide ">
-      <div className="flex flex-col max-w-2xl mx-auto">
+    <div className=" w-1/2 overflow-y-auto scrollbar-hide ">
+      <div className="flex flex-col  max-w-2xl mx-auto">
         <MessagePanel input={input}/>
           <MessageForm 
           widthType="w-1/2"
@@ -24,6 +24,11 @@ export default function RagChat(){
     </div>
     <div className="w-1/2 my-auto">
       <UploadDropzone
+        appearance={{
+            button: "ut-ready:bg-red-500 ut-uploading:cursor-not-allowed rounded-r-none bg-red-500 bg-none after:bg-orange-400",
+            label: "text-red-500"
+          }
+        }
         className=""
         endpoint="pdfUploader"
         onClientUploadComplete={(res) => {
