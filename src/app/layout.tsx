@@ -6,7 +6,7 @@ import { type Metadata } from "next";
 
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
-import { ourFileRouter } from "@/app/api/uploadthing/core";
+import { pdfRouter } from "@/app/api/uploadthing/core";
 
 import StickyNav from "@/app/_components/stickynav";
 
@@ -29,7 +29,7 @@ export default function RootLayout({
            * leaked to the client. The data passed to the client is the same
            * as if you were to fetch `/api/uploadthing` directly.
            */
-          routerConfig={extractRouterConfig(ourFileRouter)}
+          routerConfig={extractRouterConfig(pdfRouter)}
         />
         <StickyNav/>
         {children}

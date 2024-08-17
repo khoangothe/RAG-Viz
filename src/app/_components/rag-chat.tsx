@@ -3,7 +3,6 @@
 import MessageForm from "./messageForm";
 import MessagePanel from "./messagePanel";
 import { useState } from "react";
-import { useAIState, useUIState } from "ai/rsc";
 import { UploadDropzone } from "@/app/_components/uploadthing";
 
 export default function RagChat(){
@@ -34,6 +33,7 @@ export default function RagChat(){
         onClientUploadComplete={(res) => {
           // Do something with the response
           console.log("Files: ", res);
+          //TODO: Translate this into a nice alert 
           alert("Upload Completed");
         }}
         onUploadError={(error: Error) => {
