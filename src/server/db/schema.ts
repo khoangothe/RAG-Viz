@@ -40,7 +40,7 @@ export const users = createTable(
 export const files = createTable(
   "files",
   {
-    id: serial("id").primaryKey(),
+    id: varchar("id").primaryKey(),
     userid: varchar("userid", { length: 256 }),
     file_name: varchar("file_name", { length: 256 }),
     file_url: varchar("file_url", { length: 256 }),
