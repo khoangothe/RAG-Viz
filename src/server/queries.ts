@@ -12,3 +12,5 @@ export async function getDocument( id : string){
     )
     return file
 }
+
+export type FileType = Awaited<ReturnType<typeof getDocument>>;
