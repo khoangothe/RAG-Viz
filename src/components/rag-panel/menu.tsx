@@ -15,14 +15,16 @@ import {
   TooltipContent,
   TooltipProvider
 } from "@/components/ui/tooltip";
+import { FileType } from "@/server/queries";
 
 interface MenuProps {
   isOpen: boolean | undefined;
+  files : FileType[]
 }
 
-export function     Menu({ isOpen }: MenuProps) {
+export function Menu({ isOpen, files }: MenuProps) {
   const pathname = usePathname();
-  const menuList = getMenuList(pathname);
+  const menuList = getMenuList(pathname, files);
 
   return (
     <ScrollArea className="[&>div>div[style]]:!block scrollbar-hide">

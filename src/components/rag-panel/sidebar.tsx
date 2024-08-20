@@ -1,7 +1,7 @@
 'use client'
 
 import Link from "next/link";
-import { PanelsTopLeft } from "lucide-react";
+import { ChartNetwork } from 'lucide-react';
 
 import { cn } from "@/lib/utils";
 import { useStore } from "@/hooks/use-store";
@@ -9,8 +9,9 @@ import { Button } from "@/components/ui/button";
 import { Menu } from "@/components/rag-panel/menu";
 import { useSidebarToggle } from "@/hooks/use-sidebar-toggle";
 import { SidebarToggle } from "@/components/rag-panel/sidebar-toggle";
+import { FileType } from "@/server/queries";
 
-export function Sidebar() {
+export function Sidebar({files} : {files: FileType[]}) {
   const sidebar = useStore(useSidebarToggle, (state) => state);
   
   if(!sidebar) return null;
@@ -32,8 +33,8 @@ export function Sidebar() {
           variant="link"
           asChild
         >
-          <Link href="/dashboard" className="flex items-center gap-2">
-            <PanelsTopLeft className="w-6 h-6 mr-1" />
+          <Link href="/" className="flex items-center gap-2">
+            <ChartNetwork className="w-6 h-6 mr-1" />
             <h1
               className={cn(
                 "font-bold text-lg whitespace-nowrap transition-[transform,opacity,display] ease-in-out duration-300",
@@ -46,7 +47,7 @@ export function Sidebar() {
             </h1>
           </Link>
         </Button>
-        <Menu isOpen={sidebar?.isOpen} />
+        <Menu isOpen={sidebar?.isOpen} files={files}/>
       </div>
     </aside>
   );

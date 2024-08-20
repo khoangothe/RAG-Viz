@@ -1,3 +1,5 @@
+import { FileType } from "@/server/queries";
+import { sum } from "drizzle-orm";
 import {
     Tag,
     Users,
@@ -27,15 +29,23 @@ import {
     menus: Menu[];
   };
   
-  export function getMenuList(pathname: string): Group[] {
+  export function getMenuList(pathname: string, files: FileType[]): Group[] {
+    const submenus = files.map((file : FileType) : Submenu =>{
+        return {
+          "href" : "/simple-rag/docs/" + file?.id,
+          "label": file?.file_name + "",
+          "active": pathname === "/simple-rag/docs/" + file?.id
+        }
+      }
+    );
     return [
       {
         groupLabel: "",
         menus: [
           {
-            href: "/dashboard",
-            label: "Dashboard",
-            active: pathname.includes("/dashboard"),
+            href: "/simple-rag",
+            label: "Simple RAG",
+            active: pathname.includes("/simple-rag"),
             icon: LayoutGrid,
             submenus: []
           }
@@ -46,35 +56,10 @@ import {
         menus: [
           {
             href: "",
-            label: "Posts",
+            label: "Files Uploaded",
             active: pathname.includes("/posts"),
             icon: SquarePen,
-            submenus: [
-              {
-                href: "/posts",
-                label: "All Posts",
-                active: pathname === "/posts"
-              },
-              {
-                href: "/posts/new",
-                label: "New Post",
-                active: pathname === "/posts/new"
-              }
-            ]
-          },
-          {
-            href: "/categories",
-            label: "Categories",
-            active: pathname.includes("/categories"),
-            icon: Bookmark,
-            submenus: []
-          },
-          {
-            href: "/tags",
-            label: "Tags",
-            active: pathname.includes("/tags"),
-            icon: Tag,
-            submenus: []
+            submenus: submenus
           }
         ]
       },

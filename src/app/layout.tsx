@@ -10,7 +10,6 @@ import { extractRouterConfig } from "uploadthing/server";
 import { pdfRouter } from "@/app/api/uploadthing/core";
 
 import StickyNav from "@/components/navigation-bar/stickynav";
-import { Sidebar } from "@/components/rag-panel/sidebar";
 
 export const metadata: Metadata = {
   title: "RagViz - Visual Representation of RAG application",
@@ -34,7 +33,6 @@ export default function RootLayout({
           routerConfig={extractRouterConfig(pdfRouter)}
         />
         <StickyNav/>
-        <Sidebar/>
         {children}
       </body>
     </html>
