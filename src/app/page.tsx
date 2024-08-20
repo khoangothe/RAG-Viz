@@ -1,12 +1,11 @@
 'use client'
 
-import { useStore } from "@/hooks/use-store";
-import { useSidebarToggle } from "@/hooks/use-sidebar-toggle";
+import { Sidebar } from "@/components/rag-panel/sidebar";
 
 export default function HomePage() {
-  const sidebar = useStore(useSidebarToggle, (state) => state);
   return (
     <main className="flex h-screen w-1/2">
+      <Sidebar/>
      </main>
   );
 }

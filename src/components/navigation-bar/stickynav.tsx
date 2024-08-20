@@ -32,7 +32,7 @@ const links = [
     }
   ]
   
-  const NavigationMenuDemo = () => {
+  export const NavigationMenuDemo = () => {
     const pathname = usePathname();
     const currentLink = links.find(link => link.href === pathname) ?? links[0];
     const otherLinks = links.filter(link => link.href !== pathname);

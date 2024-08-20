@@ -1,5 +1,5 @@
 import Chat from "../../components/chat-component/chat";
-import { AI } from "@/lib/chat/actions";
+import { AI } from "@/actions/chat/actions";
 import { nanoid } from "@/lib/utils";
 
 export default function HomePage() {

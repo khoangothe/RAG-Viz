@@ -1,6 +1,6 @@
 'use client'
 
-import { AI } from '@/lib/chat/actions'
+import { AI } from '@/actions/chat/actions'
 import { nanoid } from '@/lib/utils'
 import { useActions, useUIState } from 'ai/rsc'
 import Textarea from 'react-textarea-autosize'

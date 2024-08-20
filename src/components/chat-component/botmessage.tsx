@@ -3,7 +3,7 @@
 
 import * as Avatar from '@radix-ui/react-avatar';
 import { StreamableValue, useStreamableValue } from 'ai/rsc'
-import { useStreamableText } from '@/lib/hooks/use-streamable-text'
+import { useStreamableText } from '@/hooks/use-streamable-text'
 
 
 export default function BotMessage({content} : {content: string | StreamableValue<string> }){
@@ -11,7 +11,7 @@ export default function BotMessage({content} : {content: string | StreamableValu
     const text = useStreamableText(content)
 
     return <div  className="w-full flex  py-4">
-    <div className="flex text-white  bg-slate-40 ">
+    <div className="flex  bg-slate-40 ">
       <div className="flex-shrink-0 flex flex-col items-end mr-5">
 
         <div className="h-8 w-8">

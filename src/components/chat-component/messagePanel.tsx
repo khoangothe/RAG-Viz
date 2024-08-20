@@ -1,6 +1,6 @@
 'use client'
 
-import { AIType, UIState } from '@/lib/chat/actions';
+import { AIType, UIState } from '@/actions/chat/actions';
 import {useUIState } from 'ai/rsc';
 
 

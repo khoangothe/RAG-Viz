@@ -1,5 +1,5 @@
 import RagChat from "@/components/chat-component/rag-chat";
-import { AI } from "@/lib/chat/actions";
+import { AI } from "@/actions/chat/actions";
 import { nanoid } from "@/lib/utils";
 
 export default async function Documents({params} : {params: {id : string}}){

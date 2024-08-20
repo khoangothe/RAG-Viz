@@ -25,6 +25,7 @@ const onConnect = useCallback((params : any) => setEdges((eds) => addEdge(params
 
 return (
   <ReactFlow
+    className='text-black'
     nodes={nodes}
     edges={edges}
     onNodesChange={onNodesChange}
