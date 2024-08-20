@@ -5,8 +5,6 @@ export default async function RootLayout({
     children,
   }: Readonly<{ children: React.ReactNode }>) {
     const files = await getDocuments()
-    console.log(files)
-
     return <>
         <Sidebar files={files}/>
         {children}
