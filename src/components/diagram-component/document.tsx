@@ -4,7 +4,6 @@ import { useCallback} from 'react';
 import {
 ReactFlow,
 Controls,
-Background,
 useNodesState,
 useEdgesState,
 addEdge,

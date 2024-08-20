@@ -1,4 +1,4 @@
-import RagChat from "@/app/_components/rag-chat";
+import RagChat from "@/components/chat-component/rag-chat";
 import { AI } from "@/lib/chat/actions";
 import { nanoid } from "@/lib/utils";
 

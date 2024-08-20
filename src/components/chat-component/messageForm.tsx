@@ -4,12 +4,12 @@ import { AI } from '@/lib/chat/actions'
 import { nanoid } from '@/lib/utils'
 import { useActions, useUIState } from 'ai/rsc'
 import Textarea from 'react-textarea-autosize'
-import {Button, IconButton} from '@radix-ui/themes'
+import {IconButton} from '@radix-ui/themes'
 import {GearIcon} from "@radix-ui/react-icons"
 import UserMessage from './usermessage'
 
 import classNames from 'classnames';
-import React, { KeyboardEventHandler } from 'react'
+import React from 'react'
 
 
 export default function MessageForm({

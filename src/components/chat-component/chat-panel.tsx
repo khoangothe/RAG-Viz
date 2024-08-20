@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from "react";
-import MessagePanel from "@/app/_components/messagePanel"
-import MessageForm from "@/app/_components/messageForm"
+import MessagePanel from "@/components/chat-component/messagePanel"
+import MessageForm from "@/components/chat-component/messageForm"
 
 
 export default function ChatPanel(){

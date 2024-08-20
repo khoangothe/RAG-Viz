@@ -1,5 +1,4 @@
-import Chat from "../_components/chat";
-import StickyNav from "../_components/stickynav";
+import Chat from "../../components/chat-component/chat";
 import { AI } from "@/lib/chat/actions";
 import { nanoid } from "@/lib/utils";
 

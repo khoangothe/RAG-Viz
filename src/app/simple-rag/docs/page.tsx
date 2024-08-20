@@ -1,6 +1,6 @@
 'use client'
 
-import { UploadDropzone } from "@/app/_components/uploadthing";
+import { UploadDropzone } from "@/components/upload/uploadthing";
 import { nanoid } from "@/lib/utils";
 import {usePathname, useRouter } from 'next/navigation';
 

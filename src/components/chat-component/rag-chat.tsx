@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import Document from "@/app/_components/document";
+import Document from "@/components/diagram-component/document";
 import ChatPanel from './chat-panel';
 import {getDocument} from "@/server/queries";
 

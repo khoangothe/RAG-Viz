@@ -12,7 +12,7 @@ import {Message} from "@/lib/types";
 
 import { nanoid } from '@/lib/utils';
 
-import BotMessage from '@/app/_components/botmessage';
+import BotMessage from '@/components/chat-component/botmessage';
 
   export type AIState = {
     chatId: string

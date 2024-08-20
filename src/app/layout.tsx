@@ -9,7 +9,7 @@ import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { pdfRouter } from "@/app/api/uploadthing/core";
 
-import StickyNav from "@/app/_components/stickynav";
+import StickyNav from "@/components/navigation-bar/stickynav";
 
 export const metadata: Metadata = {
   title: "RagViz - Visual Representation of RAG application",
