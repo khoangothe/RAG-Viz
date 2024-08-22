@@ -1,13 +1,11 @@
 import { FileType } from "@/server/queries";
 import { sum } from "drizzle-orm";
 import {
-    Tag,
-    Users,
-    Settings,
-    Bookmark,
-    SquarePen,
-    LayoutGrid,
-    LucideIcon
+    FileArchive,
+    Hexagon,
+    LucideIcon,
+    Bot,
+    Home
   } from "lucide-react";
   
   type Submenu = {
@@ -43,10 +41,24 @@ import {
         groupLabel: "",
         menus: [
           {
+            href: "/",
+            label: "Home",
+            active: pathname ==="/",
+            icon: Home,
+            submenus: []
+          },
+          {
+            href: "/chat",
+            label: "Chat",
+            active: pathname.includes("/chat"),
+            icon: Bot,
+            submenus: []
+          },
+          {
             href: "/simple-rag",
             label: "Simple RAG",
             active: pathname.includes("/simple-rag"),
-            icon: LayoutGrid,
+            icon: Hexagon,
             submenus: []
           }
         ]
@@ -58,27 +70,8 @@ import {
             href: "",
             label: "Files Uploaded",
             active: pathname.includes("/posts"),
-            icon: SquarePen,
+            icon: FileArchive,
             submenus: submenus
-          }
-        ]
-      },
-      {
-        groupLabel: "Settings",
-        menus: [
-          {
-            href: "/users",
-            label: "Users",
-            active: pathname.includes("/users"),
-            icon: Users,
-            submenus: []
-          },
-          {
-            href: "/account",
-            label: "Account",
-            active: pathname.includes("/account"),
-            icon: Settings,
-            submenus: []
           }
         ]
       }

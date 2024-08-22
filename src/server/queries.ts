@@ -1,16 +1,25 @@
 import "server-only";
+import { auth } from "@clerk/nextjs/server";
 
 
 import { db } from "./db";
 
 export async function getDocuments(){
-    const files = await db.query.files.findMany();
-            
+    
+    let files : FileType[];
+    const user = auth();
+
+    if (!user.userId) {
+        files = []
+    }else{
+        files = await db.query.files.findMany();
+
+    }            
     return files
-    console.log(files)
 }
 
 export async function getDocument( id : string){
+    
     const file = await db.query.files.findFirst(
         {
             where: (file, {eq}) => eq(file.id, id)

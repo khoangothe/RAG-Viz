@@ -2,12 +2,9 @@ import "@/styles/globals.css";
 import "@uploadthing/react/styles.css";
 import '@xyflow/react/dist/style.css';
 
+
 import {
-  ClerkProvider,
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton
+  ClerkProvider
 } from '@clerk/nextjs'
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
@@ -17,6 +14,7 @@ import { extractRouterConfig } from "uploadthing/server";
 import { pdfRouter } from "@/app/api/uploadthing/core";
 
 import StickyNav from "@/components/navigation-bar/stickynav";
+import ServerSideBar from "@/components/rag-panel/server-sidebar";
 
 export const metadata: Metadata = {
   title: "RagViz - Visual Representation of RAG application",
@@ -24,10 +22,13 @@ export const metadata: Metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  return (
+
+
+
+    return (
     <ClerkProvider>
       <html lang="en" className={`${GeistSans.variable}`}>
         <body className="overflow">
@@ -42,6 +43,7 @@ export default function RootLayout({
           />
 
           <StickyNav/>
+          <ServerSideBar/>
           {children}
         </body>
       </html>

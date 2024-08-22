@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Ellipsis, LogOut } from "lucide-react";
+import { Ellipsis, LogIn, LogOut } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utils";
@@ -16,6 +16,15 @@ import {
   TooltipProvider
 } from "@/components/ui/tooltip";
 import { FileType } from "@/server/queries";
+import { 
+  SignOutButton, useClerk,
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton
+
+} from "@clerk/nextjs";
 
 interface MenuProps {
   isOpen: boolean | undefined;
@@ -25,6 +34,7 @@ interface MenuProps {
 export function Menu({ isOpen, files }: MenuProps) {
   const pathname = usePathname();
   const menuList = getMenuList(pathname, files);
+  const { signOut, openSignIn, user } = useClerk();
 
   return (
     <ScrollArea className="[&>div>div[style]]:!block scrollbar-hide">
@@ -109,8 +119,13 @@ export function Menu({ isOpen, files }: MenuProps) {
             <TooltipProvider disableHoverableContent>
               <Tooltip delayDuration={100}>
                 <TooltipTrigger asChild>
+                  <div className="w-full">
+                  <SignedIn>
                   <Button
-                    onClick={() => {}}
+                    onClick={() => 
+                      {
+                        signOut({ redirectUrl: '/' })}
+                      }
                     variant="outline"
                     className="w-full justify-center h-10 mt-5"
                   >
@@ -123,13 +138,44 @@ export function Menu({ isOpen, files }: MenuProps) {
                         isOpen === false ? "opacity-0 hidden" : "opacity-100"
                       )}
                     >
-                      Sign out
+                      <SignOutButton/>
                     </p>
                   </Button>
+                  </SignedIn>
+                  <SignedOut>
+                    <Button
+                      onClick={() => 
+                        {
+                          openSignIn({})}
+                        }
+                      variant="outline"
+                      className="w-full justify-center h-10 mt-5"
+                    >
+                      <span className={cn(isOpen === false ? "" : "mr-4")}>
+                        <LogIn size={18} />
+                      </span>
+                      <p
+                        className={cn(
+                          "whitespace-nowrap",
+                          isOpen === false ? "opacity-0 hidden" : "opacity-100"
+                        )}
+                      >
+                        <SignInButton/>
+                      </p>
+                    </Button>
+                  </SignedOut>
+                  </div>
+
                 </TooltipTrigger>
-                {isOpen === false && (
-                  <TooltipContent side="left">Sign out</TooltipContent>
-                )}
+
+                  {isOpen === false && !user && (
+                    <TooltipContent side="left">Sign in</TooltipContent>
+
+                  )}
+                  {isOpen === false && user && (
+                    <TooltipContent side="left">Sign out</TooltipContent>
+                  )}
+
               </Tooltip>
             </TooltipProvider>
           </li>

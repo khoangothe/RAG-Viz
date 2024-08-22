@@ -140,7 +140,9 @@ export default function StickyNav(){
                   </div>
                 </SignedOut>
                 <SignedIn>
+                  <div className='pr-10'>
                   <UserButton />
+                  </div>
                 </SignedIn>
             </div>
         </nav>
