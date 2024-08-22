@@ -1,5 +1,13 @@
 'use client';
 
+import {
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton
+} from '@clerk/nextjs'
+
 import React from 'react';
 
 import { usePathname} from 'next/navigation';
@@ -7,6 +15,7 @@ import { usePathname} from 'next/navigation';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 import classNames from 'classnames';
 import { CaretDownIcon } from '@radix-ui/react-icons';
+import { Button } from "@/components/ui/button"
 
 const links = [
     {
@@ -120,6 +129,19 @@ export default function StickyNav(){
         <nav className="flex left-0 w-full  h-20 items-center pl-10 fixed top-0">
             <div className="flex w-full gap-3 justify-between">
                 <NavigationMenuDemo/>
+                <SignedOut>
+                  <div className='flex space-x-3 pr-5 -z-0'>
+                  <Button className='rounded-full bg-white text-black' variant="outline">
+                    <SignInButton />
+                  </Button>
+                  <Button  className='rounded-full  hover:bg-red-500 hover:text-black' variant="outline">
+                    <SignUpButton/>
+                  </Button>
+                  </div>
+                </SignedOut>
+                <SignedIn>
+                  <UserButton />
+                </SignedIn>
             </div>
         </nav>
     )
