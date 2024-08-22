@@ -20,7 +20,7 @@ export function Sidebar({files} : {files: FileType[]}) {
     <aside
       className={cn(
         "fixed top-0 right-0 z-20 h-screen translate-x-full lg:translate-x-0 transition-[width] ease-in-out duration-300 bg-black",
-        sidebar?.isOpen === false ? "w-[90px]" : "w-72"
+        sidebar?.isOpen === false ? "w-[0px] hover:w-[90px]" : "w-72"
       )}
     >
       <SidebarToggle isOpen={sidebar?.isOpen} setIsOpen={sidebar?.setIsOpen} />
