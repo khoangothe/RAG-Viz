@@ -5,6 +5,7 @@ Create an interface to visualize the steps of RAG in realtime
 1. Chat application:
 - [x] Top down UI Layout 
 - [X] Enter to submit form
+- [ ] Persist Chat History
 2. RAG UI visualization:
 - [ ] Add Chunking Options and Create Index options
 - [x] Split sections for the visualization panel in RAG
@@ -22,3 +23,7 @@ Create an interface to visualize the steps of RAG in realtime
 - [ ] LLM Node
 - [ ] LLM Output Node
 - [ ] Conditional Node 
+4. React Flow
+- [ ] Create Input Node
+- [ ] Create Index Node
+- [ ] Create LLM node
