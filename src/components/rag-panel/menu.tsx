@@ -25,6 +25,8 @@ import {
   UserButton
 
 } from "@clerk/nextjs";
+import { toast } from "sonner";
+import { error } from "console";
 
 interface MenuProps {
   isOpen: boolean | undefined;
@@ -42,7 +44,7 @@ export function Menu({ isOpen, files }: MenuProps) {
         <ul className="flex flex-col min-h-[calc(100vh-48px-36px-16px-32px)] lg:min-h-[calc(100vh-32px-40px-32px)] items-start space-y-1 px-2">
           {menuList.map(({ groupLabel, menus }, index) => (
             <li className={cn("w-full", groupLabel ? "pt-5" : "")} key={index}>
-              {(isOpen && groupLabel) || isOpen === undefined ? (
+              {(isOpen && groupLabel) ?? isOpen === undefined ? (
                 <p className=" text-sm font-medium text-muted-foreground px-4 pb-2 max-w-[248px] truncate">
                   {groupLabel}
                 </p>
@@ -124,7 +126,12 @@ export function Menu({ isOpen, files }: MenuProps) {
                   <Button
                     onClick={() => 
                       {
-                        signOut({ redirectUrl: '/' })}
+                        signOut({ redirectUrl: '/' }).then(()=>{
+                          toast("Signed Out")
+                        }).catch((error)=>{
+                          toast('Error Signing Out: '  + error);
+                        })
+                      }
                       }
                     variant="outline"
                     className="w-full justify-center h-10 mt-5"

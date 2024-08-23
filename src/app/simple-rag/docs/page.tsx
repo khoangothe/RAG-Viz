@@ -7,8 +7,7 @@ import { toast } from "sonner"
 
 
 export default function HomePage() {
-  const id = nanoid()
-  const { replace, refresh} = useRouter();
+  const router = useRouter();
   const pathname = usePathname();
 
   return (
@@ -31,8 +30,8 @@ export default function HomePage() {
         onClientUploadComplete={(res) => {
           if (res.length > 0){
             const id = res[0]?.key;
-            replace(`${pathname}/${id?.toString()}`);
-            refresh()
+            router.replace(`${pathname}/${id?.toString()}`);
+            router.refresh()
             toast("Upload Completed")
           }
         }}

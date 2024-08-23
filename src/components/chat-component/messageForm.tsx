@@ -1,15 +1,18 @@
 'use client'
 
-import { AI } from '@/actions/chat/actions'
+import { AI, UIState } from '@/actions/chat/actions'
 import { nanoid } from '@/lib/utils'
 import { useActions, useUIState } from 'ai/rsc'
 import Textarea from 'react-textarea-autosize'
 import {IconButton} from '@radix-ui/themes'
 import {GearIcon} from "@radix-ui/react-icons"
 import UserMessage from './usermessage'
+import BotMessage from './botmessage'
 
 import classNames from 'classnames';
 import React from 'react'
+import { error } from 'console'
+import { toast } from 'sonner'
 
 
 export default function MessageForm({
@@ -39,15 +42,24 @@ export default function MessageForm({
            display: <UserMessage  content={value}/>
          }
        ])
-   
-       const responseMessage = await submitUserMessage(value)
-       setMessages(currentMessages => [...currentMessages, responseMessage])
+
+      
+      const responseMessage : UIState  |  null = await submitUserMessage(value).catch((error : Error) => {
+            toast("Error Fetching Messages: " +  error.message)
+            return null;
+          }
+         )
+      
+      if (responseMessage){
+         setMessages(currentMessages => [...currentMessages, responseMessage])
+      }
+      
 
    }
 
-   const handleKeyDown = (event : React.KeyboardEvent<HTMLTextAreaElement>) => {
+   const  handleKeyDown = async (event : React.KeyboardEvent<HTMLTextAreaElement>) => {
       if (event.key === 'Enter' && !event.shiftKey) {
-        handleSubmit(event as unknown as React.FormEvent<HTMLFormElement>); // Trigger form submission
+        await handleSubmit(event as unknown as React.FormEvent<HTMLFormElement>); // Trigger form submission
       }
     };
   
