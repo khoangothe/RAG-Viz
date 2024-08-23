@@ -14,6 +14,10 @@ import { nanoid } from '@/lib/utils';
 
 import BotMessage from '@/components/chat-component/botmessage';
 
+import { auth, clerkClient } from "@clerk/nextjs/server";
+
+import { UploadThingError } from "uploadthing/server";
+
   export type AIState = {
     chatId: string
     messages: Message[]
@@ -29,8 +33,29 @@ import BotMessage from '@/components/chat-component/botmessage';
     submitUserMessage: (content: string) => Promise<UIState>;
   };
 
+
   async function submitUserMessage(content: string)  : Promise<UIState>{
     'use server'
+
+    //TO DO: HOW TO CACHE clerkClient.users.getUser
+    const user = auth();
+    if (!user.userId){
+      return {
+        id: nanoid(),
+        role: 'assistant',
+        display: <BotMessage content="You must login to chat with Bot." />
+      }
+    }
+    const fullUserData = await clerkClient.users.getUser(user.userId);
+
+    if (fullUserData?.privateMetadata?.["can-chat"] !== true){
+      return {
+        id: nanoid(),
+        role: 'assistant',
+        display: <BotMessage content="Only users who have permission can chat with the bot now. Future support for self-provided key will be supported." />
+      }
+    }
+
     const aiState = getMutableAIState<AIType>()
     aiState.update({
       ...aiState.get(),

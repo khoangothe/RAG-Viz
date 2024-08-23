@@ -23,8 +23,9 @@ export const pdfRouter = {
 
       const user = auth();
       if (!user.userId) throw new UploadThingError("Unauthorized");
-      // TO DO: Add role for full user
-      //const fullUserData = await clerkClient.users.getUser(user.userId);
+      const fullUserData = await clerkClient.users.getUser(user.userId);
+
+      if (fullUserData?.privateMetadata?.["can-upload"] !== true) throw new UploadThingError("User doesn't have upload permission");
 
       return { userId: user.userId };
 
