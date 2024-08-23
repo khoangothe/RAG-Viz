@@ -10,7 +10,7 @@ export const config = {
 };
 
 
-const isPublicRoute = createRouteMatcher(['/sign-in(.*)', '/sign-up(.*)', "/", "/chat", "/simple-rag"])
+const isPublicRoute = createRouteMatcher(['/sign-in(.*)', '/sign-up(.*)', "/", "/chat", "/simple-rag", "/api/uploadthing(.*)"])
 
 export default clerkMiddleware((auth, request) => {
   if (!isPublicRoute(request)) {

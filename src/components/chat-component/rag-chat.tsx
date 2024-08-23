@@ -9,6 +9,8 @@ import {notFound } from 'next/navigation';
 export default async function RagChat({doc_id} : {doc_id : string}){
     
   const file = await getDocument(doc_id);
+  console.log(doc_id)
+  console.log(file)
   if (!file){
     notFound();
   }

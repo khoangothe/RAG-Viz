@@ -7,7 +7,7 @@ import {usePathname, useRouter } from 'next/navigation';
 
 export default function HomePage() {
   const id = nanoid()
-  const { replace } = useRouter();
+  const { replace, refresh} = useRouter();
   const pathname = usePathname();
 
   return (
@@ -21,11 +21,14 @@ export default function HomePage() {
         }
         endpoint="pdfUploader"
         onClientUploadComplete={(res) => {
+          alert("Upload Completed");
+
           if (res.length > 0){
             const id = res[0]?.key;
             //To do: Change Alert to a pretty message
             alert("Upload Completed");
             replace(`${pathname}/${id?.toString()}`);
+            refresh()
           }
         }}
         onUploadError={(error: Error) => {

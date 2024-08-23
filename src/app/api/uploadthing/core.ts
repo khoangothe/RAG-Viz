@@ -2,6 +2,8 @@ import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
 import {db} from  "@/server/db" 
 import { files } from "@/server/db/schema";
+import { auth, clerkClient } from "@clerk/nextjs/server";
+
 import { WebPDFLoader } from "@langchain/community/document_loaders/web/pdf";
 
 import { OpenAIEmbeddings } from "@langchain/openai";
@@ -18,8 +20,14 @@ const f = createUploadthing();
 export const pdfRouter = {
   pdfUploader: f({ pdf: { maxFileSize: "4MB", maxFileCount : 1} })
     .middleware(async ({ req }) => {
-      // Whatever is returned here is accessible in onUploadComplete as `metadata`
-      return { userId: "1" };
+
+      const user = auth();
+      if (!user.userId) throw new UploadThingError("Unauthorized");
+      // TO DO: Add role for full user
+      //const fullUserData = await clerkClient.users.getUser(user.userId);
+
+      return { userId: user.userId };
+
     })
     .onUploadComplete(async ({ metadata, file }) => {
       // This code RUNS ON YOUR SERVER after upload
