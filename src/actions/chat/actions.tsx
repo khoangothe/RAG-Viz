@@ -14,9 +14,11 @@ import { nanoid } from '@/lib/utils';
 
 import BotMessage from '@/components/chat-component/botmessage';
 
-import { auth, clerkClient } from "@clerk/nextjs/server";
+import { auth, clerkClient, User} from "@clerk/nextjs/server";
 
 import { UploadThingError } from "uploadthing/server";
+import { Redis } from '@upstash/redis'
+
 
   export type AIState = {
     chatId: string
@@ -33,7 +35,11 @@ import { UploadThingError } from "uploadthing/server";
     submitUserMessage: (content: string) => Promise<UIState>;
   };
 
-
+  const redis = new Redis({
+    url: process.env.UPSTASH_REDIS_URL,
+    token: process.env.UPSTASH_REDIS_TOKEN,
+  });
+  
   async function submitUserMessage(content: string)  : Promise<UIState>{
     'use server'
 
@@ -46,8 +52,13 @@ import { UploadThingError } from "uploadthing/server";
         display: <BotMessage content="You must login to chat with Bot." />
       }
     }
-    const fullUserData = await clerkClient.users.getUser(user.userId);
 
+    let fullUserData  = await redis.get<User>(`user:${user.userId}`);
+    if (!fullUserData) {
+      fullUserData = await clerkClient.users.getUser(user.userId);
+      await redis.set(`user:${user.userId}`, JSON.stringify(fullUserData));
+    } 
+  
     if (fullUserData?.privateMetadata?.["can-chat"] !== true){
       return {
         id: nanoid(),
