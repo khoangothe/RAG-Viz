@@ -3,6 +3,7 @@
 import { UploadDropzone } from "@/components/upload/uploadthing";
 import { nanoid } from "@/lib/utils";
 import {usePathname, useRouter } from 'next/navigation';
+import { toast } from "sonner"
 
 
 export default function HomePage() {
@@ -20,20 +21,23 @@ export default function HomePage() {
           }
         }
         endpoint="pdfUploader"
+        onUploadAborted={() =>{
+          toast("Upload Aborted")
+        }}
+        onBeforeUploadBegin={(files) =>{
+          toast("Uploading...")
+          return files;
+        }}
         onClientUploadComplete={(res) => {
-          alert("Upload Completed");
-
           if (res.length > 0){
             const id = res[0]?.key;
-            //To do: Change Alert to a pretty message
-            alert("Upload Completed");
             replace(`${pathname}/${id?.toString()}`);
             refresh()
+            toast("Upload Completed")
           }
         }}
         onUploadError={(error: Error) => {
-          // To do: Change Alert to a pretty message
-          alert(`ERROR! ${error.message}`);
+          toast(`ERROR! ${error.message}`);
         }}
       />    
     </div>

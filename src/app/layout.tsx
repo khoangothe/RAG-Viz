@@ -16,6 +16,8 @@ import { pdfRouter } from "@/app/api/uploadthing/core";
 import StickyNav from "@/components/navigation-bar/stickynav";
 import ServerSideBar from "@/components/rag-panel/server-sidebar";
 
+import { Toaster } from "@/components/ui/sonner"
+
 export const metadata: Metadata = {
   title: "RagViz - Visual Representation of RAG application",
   description: "A Step by Step Visualization of a RAG application",
@@ -40,11 +42,13 @@ export default async function RootLayout({
              * as if you were to fetch `/api/uploadthing` directly.
              */
             routerConfig={extractRouterConfig(pdfRouter)}
+            
           />
 
           <StickyNav/>
           <ServerSideBar/>
           {children}
+          <Toaster />
         </body>
       </html>
     </ClerkProvider>
