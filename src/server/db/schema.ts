@@ -16,7 +16,9 @@ import {
  *
  * @see https://orm.drizzle.team/docs/goodies#multi-project-schema
  */
-export const createTable = pgTableCreator((name) => `ai-assistant-blog_${name}`);
+export const createTable = pgTableCreator(
+  (name) => `ai-assistant-blog_${name}`,
+);
 
 export const users = createTable(
   "users",
@@ -28,13 +30,13 @@ export const users = createTable(
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
     updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(
-      () => new Date()
+      () => new Date(),
     ),
   },
   (user) => ({
     usernameIndex: index("users_name_idx").on(user.username),
     emailIndex: index("users_email_idx").on(user.email),
-  })
+  }),
 );
 
 export const files = createTable(
@@ -49,11 +51,10 @@ export const files = createTable(
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
     updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(
-      () => new Date()
+      () => new Date(),
     ),
   },
   (example) => ({
     userIdIndex: index("files_username_idx").on(example.userid),
-  })
+  }),
 );
-

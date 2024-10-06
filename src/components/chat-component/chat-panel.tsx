@@ -1,21 +1,18 @@
-'use client'
+"use client";
 
 import { useState } from "react";
-import MessagePanel from "@/components/chat-component/messagePanel"
-import MessageForm from "@/components/chat-component/messageForm"
+import MessagePanel from "@/components/chat-component/messagePanel";
+import MessageForm from "@/components/chat-component/messageForm";
 
+export default function ChatPanel() {
+  const [input, setInput] = useState("");
 
-export default function ChatPanel(){
-    const [input, setInput] = useState("");
-
-    return  (<div className=" w-1/2 overflow-y-auto scrollbar-hide ">
-    <div className="flex flex-col  max-w-2xl mx-auto">
-        <MessagePanel input={input}/>
-        <MessageForm 
-          widthType="w-1/2"
-          input = {input}
-          setInput={setInput}
-        />
+  return (
+    <div className="w-1/2 overflow-y-auto scrollbar-hide">
+      <div className="mx-auto flex max-w-2xl flex-col">
+        <MessagePanel input={input} />
+        <MessageForm widthType="w-1/2" input={input} setInput={setInput} />
+      </div>
     </div>
-  </div>)
+  );
 }

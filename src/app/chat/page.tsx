@@ -3,14 +3,13 @@ import { AI } from "@/actions/chat/actions";
 import { nanoid } from "@/lib/utils";
 
 export default function HomePage() {
-  const id = nanoid()
-
+  const id = nanoid();
 
   return (
     <main className="flex h-screen w-full">
       <AI initialAIState={{ chatId: id, messages: [] }}>
-        <Chat/>
+        <Chat />
       </AI>
-     </main>
+    </main>
   );
 }

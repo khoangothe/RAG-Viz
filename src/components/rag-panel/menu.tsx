@@ -13,24 +13,24 @@ import {
   Tooltip,
   TooltipTrigger,
   TooltipContent,
-  TooltipProvider
+  TooltipProvider,
 } from "@/components/ui/tooltip";
 import { FileType } from "@/server/queries";
-import { 
-  SignOutButton, useClerk,
+import {
+  SignOutButton,
+  useClerk,
   SignInButton,
   SignUpButton,
   SignedIn,
   SignedOut,
-  UserButton
-
+  UserButton,
 } from "@clerk/nextjs";
 import { toast } from "sonner";
 import { error } from "console";
 
 interface MenuProps {
   isOpen: boolean | undefined;
-  files : FileType[]
+  files: FileType[];
 }
 
 export function Menu({ isOpen, files }: MenuProps) {
@@ -39,20 +39,20 @@ export function Menu({ isOpen, files }: MenuProps) {
   const { signOut, openSignIn, user } = useClerk();
 
   return (
-    <ScrollArea className="[&>div>div[style]]:!block scrollbar-hide">
+    <ScrollArea className="scrollbar-hide [&>div>div[style]]:!block">
       <nav className="mt-8 h-full w-full">
-        <ul className="flex flex-col min-h-[calc(100vh-48px-36px-16px-32px)] lg:min-h-[calc(100vh-32px-40px-32px)] items-start space-y-1 px-2">
+        <ul className="flex min-h-[calc(100vh-48px-36px-16px-32px)] flex-col items-start space-y-1 px-2 lg:min-h-[calc(100vh-32px-40px-32px)]">
           {menuList.map(({ groupLabel, menus }, index) => (
             <li className={cn("w-full", groupLabel ? "pt-5" : "")} key={index}>
-              {(isOpen && groupLabel) ?? isOpen === undefined ? (
-                <p className=" text-sm font-medium text-muted-foreground px-4 pb-2 max-w-[248px] truncate">
+              {((isOpen && groupLabel) ?? isOpen === undefined) ? (
+                <p className="max-w-[248px] truncate px-4 pb-2 text-sm font-medium text-muted-foreground">
                   {groupLabel}
                 </p>
               ) : !isOpen && isOpen !== undefined && groupLabel ? (
                 <TooltipProvider>
                   <Tooltip delayDuration={100}>
                     <TooltipTrigger className="w-full">
-                      <div className="w-full flex justify-center items-center">
+                      <div className="flex w-full items-center justify-center">
                         <Ellipsis className="h-5 w-5" />
                       </div>
                     </TooltipTrigger>
@@ -73,12 +73,12 @@ export function Menu({ isOpen, files }: MenuProps) {
                           <TooltipTrigger asChild>
                             <Button
                               variant={active ? "secondary" : "ghost"}
-                              className="w-full justify-start h-10 mb-1"
+                              className="mb-1 h-10 w-full justify-start"
                               asChild
                             >
                               <Link href={href}>
                                 <span
-                                  className={cn(isOpen === false ? "" : "mr-4 ")}
+                                  className={cn(isOpen === false ? "" : "mr-4")}
                                 >
                                   <Icon size={18} />
                                 </span>
@@ -87,7 +87,7 @@ export function Menu({ isOpen, files }: MenuProps) {
                                     "max-w-[200px] truncate",
                                     isOpen === false
                                       ? "translate-x-96 opacity-0"
-                                      : "-translate-x-0 opacity-100"
+                                      : "-translate-x-0 opacity-100",
                                   )}
                                 >
                                   {label}
@@ -113,76 +113,76 @@ export function Menu({ isOpen, files }: MenuProps) {
                         isOpen={isOpen}
                       />
                     </div>
-                  )
+                  ),
               )}
             </li>
           ))}
-          <li className="w-full grow flex items-end">
+          <li className="flex w-full grow items-end">
             <TooltipProvider disableHoverableContent>
               <Tooltip delayDuration={100}>
                 <TooltipTrigger asChild>
                   <div className="w-full">
-                  <SignedIn>
-                  <Button
-                    onClick={() => 
-                      {
-                        signOut({ redirectUrl: '/' }).then(()=>{
-                          toast("Signed Out")
-                        }).catch((error)=>{
-                          toast('Error Signing Out: '  + error);
-                        })
-                      }
-                      }
-                    variant="outline"
-                    className="w-full justify-center h-10 mt-5"
-                  >
-                    <span className={cn(isOpen === false ? "" : "mr-4")}>
-                      <LogOut size={18} />
-                    </span>
-                    <p
-                      className={cn(
-                        "whitespace-nowrap",
-                        isOpen === false ? "opacity-0 hidden" : "opacity-100"
-                      )}
-                    >
-                      <SignOutButton/>
-                    </p>
-                  </Button>
-                  </SignedIn>
-                  <SignedOut>
-                    <Button
-                      onClick={() => 
-                        {
-                          openSignIn({})}
-                        }
-                      variant="outline"
-                      className="w-full justify-center h-10 mt-5"
-                    >
-                      <span className={cn(isOpen === false ? "" : "mr-4")}>
-                        <LogIn size={18} />
-                      </span>
-                      <p
-                        className={cn(
-                          "whitespace-nowrap",
-                          isOpen === false ? "opacity-0 hidden" : "opacity-100"
-                        )}
+                    <SignedIn>
+                      <Button
+                        onClick={() => {
+                          signOut({ redirectUrl: "/" })
+                            .then(() => {
+                              toast("Signed Out");
+                            })
+                            .catch((error) => {
+                              toast("Error Signing Out: " + error);
+                            });
+                        }}
+                        variant="outline"
+                        className="mt-5 h-10 w-full justify-center"
                       >
-                        <SignInButton/>
-                      </p>
-                    </Button>
-                  </SignedOut>
+                        <span className={cn(isOpen === false ? "" : "mr-4")}>
+                          <LogOut size={18} />
+                        </span>
+                        <p
+                          className={cn(
+                            "whitespace-nowrap",
+                            isOpen === false
+                              ? "hidden opacity-0"
+                              : "opacity-100",
+                          )}
+                        >
+                          <SignOutButton />
+                        </p>
+                      </Button>
+                    </SignedIn>
+                    <SignedOut>
+                      <Button
+                        onClick={() => {
+                          openSignIn({});
+                        }}
+                        variant="outline"
+                        className="mt-5 h-10 w-full justify-center"
+                      >
+                        <span className={cn(isOpen === false ? "" : "mr-4")}>
+                          <LogIn size={18} />
+                        </span>
+                        <p
+                          className={cn(
+                            "whitespace-nowrap",
+                            isOpen === false
+                              ? "hidden opacity-0"
+                              : "opacity-100",
+                          )}
+                        >
+                          <SignInButton />
+                        </p>
+                      </Button>
+                    </SignedOut>
                   </div>
-
                 </TooltipTrigger>
 
-                  {isOpen === false && !user && (
-                    <TooltipContent side="left">Sign in</TooltipContent>
-
-                  )}
-                  {isOpen === false && user && (
-                    <TooltipContent side="left">Sign out</TooltipContent>
-                  )}
-
+                {isOpen === false && !user && (
+                  <TooltipContent side="left">Sign in</TooltipContent>
+                )}
+                {isOpen === false && user && (
+                  <TooltipContent side="left">Sign out</TooltipContent>
+                )}
               </Tooltip>
             </TooltipProvider>
           </li>

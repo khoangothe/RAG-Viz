@@ -1,6 +1,6 @@
-import {ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
-import  {cn} from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
 interface SidebarToggleProps {
@@ -10,19 +10,19 @@ interface SidebarToggleProps {
 
 export function SidebarToggle({ isOpen, setIsOpen }: SidebarToggleProps) {
   return (
-    <div className="absolute top-[12px] -left-[16px] z-20">
+    <div className="absolute -left-[16px] top-[12px] z-20">
       <Button
         onClick={() => {
-            setIsOpen?.()
+          setIsOpen?.();
         }}
-        className="rounded-full w-8 h-8"
+        className="h-8 w-8 rounded-full"
         variant="outline"
         size="icon"
       >
         <ChevronRight
           className={cn(
-            "h-4 w-4 transition-transform ease-in-out duration-700",
-            isOpen === false ? "rotate-180" : "rotate-0"
+            "h-4 w-4 transition-transform duration-700 ease-in-out",
+            isOpen === false ? "rotate-180" : "rotate-0",
           )}
         />
       </Button>

@@ -1,11 +1,8 @@
 import "@/styles/globals.css";
 import "@uploadthing/react/styles.css";
-import '@xyflow/react/dist/style.css';
+import "@xyflow/react/dist/style.css";
 
-
-import {
-  ClerkProvider
-} from '@clerk/nextjs'
+import { ClerkProvider } from "@clerk/nextjs";
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 
@@ -16,7 +13,7 @@ import { pdfRouter } from "@/app/api/uploadthing/core";
 import StickyNav from "@/components/navigation-bar/stickynav";
 import ServerSideBar from "@/components/rag-panel/server-sidebar";
 
-import { Toaster } from "@/components/ui/sonner"
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "RagViz - Visual Representation of RAG application",
@@ -27,14 +24,11 @@ export const metadata: Metadata = {
 export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-
-
-
-    return (
+  return (
     <ClerkProvider>
       <html lang="en" className={`${GeistSans.variable}`}>
         <body className="overflow">
-        <NextSSRPlugin
+          <NextSSRPlugin
             /**
              * The `extractRouterConfig` will extract **only** the route configs
              * from the router to prevent additional information from being
@@ -42,16 +36,14 @@ export default async function RootLayout({
              * as if you were to fetch `/api/uploadthing` directly.
              */
             routerConfig={extractRouterConfig(pdfRouter)}
-            
           />
 
-          <StickyNav/>
-          <ServerSideBar/>
+          <StickyNav />
+          <ServerSideBar />
           {children}
           <Toaster />
         </body>
       </html>
     </ClerkProvider>
-
   );
 }
