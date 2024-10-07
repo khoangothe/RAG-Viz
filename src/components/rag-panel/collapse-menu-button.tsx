@@ -54,8 +54,7 @@ export function CollapseMenuButton({
   const isSubmenuActive = submenus.some((submenu) => submenu.active);
   const [isCollapsed, setIsCollapsed] = useState<boolean>(isSubmenuActive);
   const [isPending, startTransition] = useTransition();
-  const [deleteId, setDeleteId] = useState();
-
+  const [deleteId, setDeleteId] = useState("");
 
   return isOpen ? (
     <Collapsible
@@ -108,16 +107,17 @@ export function CollapseMenuButton({
           <Button
             key={index}
             variant={active ? "secondary" : "ghost"}
-            className="mb-1 h-10 w-full group/item"
+            className="group/item mb-1 h-10 w-full"
             asChild
           >
-            <Link className="justify-start w-full relative" href={href}>
-              <div className="flex  w-full">
+            <Link className="relative w-full justify-start" href={href}>
+              <div className="flex w-full">
                 <span className="ml-2 mr-4">
-                  {(isPending && deleteId === href.split("/").pop() + "") ? <Loader className="text-white animate-spin w-4 h-4" />
-                    :
+                  {isPending && deleteId === href.split("/").pop() + "" ? (
+                    <Loader className="animate-spin h-4 w-4 text-white" />
+                  ) : (
                     <Dot size={18} />
-                  }
+                  )}
                 </span>
                 <p
                   className={cn(
@@ -130,18 +130,22 @@ export function CollapseMenuButton({
                   {label}
                 </p>
               </div>
-              <Button onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-                e.preventDefault(); // Prevent the default behavior of the Link navigation
-                const fileName = href.split("/").pop() + "";
-                setDeleteId(fileName)
-                startTransition(async () => {
-                  await handleDelete(fileName);
-                });
-              }}
-                className="group/inner py-auto text-white absolute bg-transparent opacity-0 group-hover/item:opacity-100 hover:bg-transparent right-0 mr-4"
+              <Button
+                onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                  e.preventDefault(); // Prevent the default behavior of the Link navigation
+                  const fileName = href.split("/").pop() + "";
+                  setDeleteId(fileName);
+                  startTransition(async () => {
+                    await handleDelete(fileName);
+                  });
+                }}
+                className="group/inner py-auto absolute right-0 mr-4 bg-transparent text-white opacity-0 hover:bg-transparent group-hover/item:opacity-100"
                 disabled={isPending}
               >
-                <Trash className="text-slate-600 group-hover/inner:text-red-100 transition-colors duration-300" size={12} />
+                <Trash
+                  className="text-slate-600 transition-colors duration-300 group-hover/inner:text-red-100"
+                  size={12}
+                />
               </Button>
             </Link>
           </Button>
